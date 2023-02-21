@@ -257,7 +257,7 @@ buildMOC <-
             d <- stats::dist(data[[i]], method = "euclidean")
 
             # Find clusters through hierarchical clustering
-            hCl <- stats::hclust(d, method = "complete")
+            hCl <- stats::hclust(d, method = hclust_method)
 
             # Extract cluster labels
             newClusterLabels <- stats::cutree(hCl, K[i])
