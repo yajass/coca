@@ -27,6 +27,7 @@
 #' available clustering algorithms. "gower" distance is only available for
 #' partitioning around medoids. In addition, "maximum", "canberra", "binary" or
 #' "minkowski" are available for k-means and hierarchical clustering.
+#' @param hclust_method Method for heirarchical clustering.
 #' @param fill Boolean. If TRUE, if there are any missing observations in one or
 #' more datasets, the corresponding cluster labels will be estimated through
 #' generalised linear models on the basis of the available labels.
@@ -94,6 +95,7 @@ buildMOC <-
              maxK = 10,
              methods = "hclust",
              distances = "euclidean",
+             hclust_method = 'ward.D2',
              fill = FALSE,
              computeAccuracy = FALSE,
              fullData = FALSE,
@@ -174,7 +176,7 @@ buildMOC <-
                   ### Step 2. Use hierarchical clust. on the consensus matrix
                   hClustering <- stats::hclust(
                       stats::dist(data[[i]], method = distance_i),
-                      method = "complete")
+                      method = hclust_method)
                   tempClLabels[j - 1, ] <- stats::cutree(hClustering, j)
                 }
 
